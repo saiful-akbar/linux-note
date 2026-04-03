@@ -69,3 +69,69 @@ git config --global init.defaultBranch main
 git config --global user.name {nama}
 git config --global user.email {email}
 ```
+
+## 1.3. Install PHP
+
+### 1.3.1. Install paket
+
+```bash
+sudo apt update && sudo apt install php -y
+```
+
+### 1.3.2. Install extension
+
+Extension yang umum digunakan
+
+```bash
+sudo apt install php-fpm php-gd php-cli php-mbstring php-xml php-curl php-mysql php-zip unzip -y
+```
+
+### 1.3.3. Cek versi
+
+```bash
+php -v
+```
+
+### 1.3.4. Install composer
+
+```bash
+sudo apt install composer -y
+```
+
+### 1.3.4. Cek versi composer
+
+```bash
+composer -V
+```
+
+## 1.4. Install NGINX
+
+### 1.4.1. Install paket
+
+```bash
+sudo apt install nginx -y
+```
+
+### 1.4.2. Start service
+
+```bash
+sudo systemctl enable nginx
+sudo systemctl start nginx
+```
+
+> [!CAUTION]
+> Jika terjadi error kemungkinan port :80 terpakai apache2 yang ikut terinstal saat instal php
+
+- Periksa apakah ada package apache2
+
+```bash
+dpkg -l | grep apache2
+```
+
+- Jika muncul hapus semua packagenya
+
+```bash
+sudo apt remove {daftar package apache2} -y
+sudo apt autoremove
+sudo apt autoclean
+```
