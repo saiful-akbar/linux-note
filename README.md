@@ -15,7 +15,13 @@ sudo mkdir /mnt/it
 sudo mkdir -p ~/.smbcredentials
 ```
 
-### 1.1.3. Edit file `sudo nano /etc/fstab` lalu tambahkan kode berikut
+### 1.1.3. Edit file `/etc/fstab`
+
+```bash
+sudo nano /etc/fstab
+```
+
+lalu tambahkan kode berikut
 
 ```bash
 //10.10.2.77/general /mnt/general cifs credentials=/home/{USERNAME}/.smbcredentials,iocharset=utf8,uid=1000,gid=1000,nofail,_x-systemd.automount 0 0
