@@ -17,11 +17,13 @@ sudo mkdir -p ~/.smbcredentials
 
 ### 1.1.3. Edit file `/etc/fstab`
 
+- Buka dieditor
+
 ```bash
 sudo nano /etc/fstab
 ```
 
-lalu tambahkan kode berikut
+- Lalu tambahkan kode berikut
 
 ```bash
 //10.10.2.77/general /mnt/general cifs credentials=/home/{USERNAME}/.smbcredentials,iocharset=utf8,uid=1000,gid=1000,nofail,_x-systemd.automount 0 0
@@ -40,7 +42,11 @@ Jika ingin mengapus mount (unmount)
 sudo umount /mnt/{folder yang ingin di-unmount}
 ```
 
-### 1.1.4. Buka file manager lalu tambahkan bookmark pada folder sharing `/mnt/*`
+### 1.1.4. Tambahkan bookmark pada folder sharing
+
+- Buka file manager
+- arahkan ke `/mnt`
+- Tambahkan folder sharing ke bookmark
 
 ## 1.2. Install GIT
 
