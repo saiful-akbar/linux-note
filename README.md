@@ -35,3 +35,25 @@ sudo umount /mnt/{folder yang ingin di-unmount}
 ```
 
 ### 1.1.4. Buka file manager lalu tambahkan bookmark pada folder sharing `/mnt/*`
+
+## 1.2. Install GIT
+
+### 1.2.1. Install paket
+
+```bash
+sudo apt update && sudo apt install git -y
+```
+
+### 1.2.2. Periksa instalasi
+
+```bash
+git --version
+```
+
+### 1.2.3. Buat global konfigurasi
+
+```bash
+git config --global init.defaultBranch main
+git config --global user.name {nama}
+git config --global user.email {email}
+```
