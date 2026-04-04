@@ -213,3 +213,17 @@ EXIT;
 ```bash
 sudo mysql -u root -p
 ```
+
+### 1.5.4. Amankan instalasi
+
+```bash
+sudo mysql_secure_installation
+```
+
+Ikuti langkah-langkah:
+
+- Set password root
+- Hapus user anonymous → YES
+- Disable remote root login → YES
+- Remove test database → YES
+- Reload privilege → YES
