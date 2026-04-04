@@ -135,3 +135,81 @@ sudo apt remove {daftar package apache2} -y
 sudo apt autoremove
 sudo apt autoclean
 ```
+
+## 1.5. Install Database MySQL
+
+### 1.5.1 Install paket
+
+```bash
+sudo apt update && sudo apt install mysql-server
+```
+
+Cek versi:
+
+```bash
+mysql --version
+```
+
+### 1.5.2. Periksa & Jalankan service
+
+- Cek status service:
+
+```bash
+sudo systemctl status mysql
+```
+
+- Kalau belum aktif:
+
+```bash
+sudo systemctl start mysql
+```
+
+- Agar MySQL auto start saat booting:
+
+```bash
+sudo systemctl enable mysql
+```
+
+- Disable auto start:
+
+```bash
+sudo systemctl disable mysql
+```
+
+### 1.5.3. Buat password untuk user root
+
+- Masuk MySQL:
+
+```bash
+sudo mysql
+```
+
+- Lihat daftar user:
+
+```sql
+SELECT user, host, plugin FROM mysql.user WHERE user = 'root'
+```
+
+- Kalau hasilnya:
+  - auth_socket → perlu diubah ke password
+  - mysql_native_password → tinggal set password saja
+
+- Set password root
+
+```sql
+ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password_baru';
+```
+
+```sql
+FLUSH PRIVILEGES;
+```
+
+- Keluar MySQL dan tes login
+
+```sql
+EXIT;
+```
+
+```bash
+sudo mysql -u root -p
+```
