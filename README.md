@@ -227,3 +227,80 @@ Ikuti langkah-langkah:
 - Disable remote root login → YES
 - Remove test database → YES
 - Reload privilege → YES
+
+## 1.6. Install Dart & Flutter
+
+### 1.6.1. Install Dependency Dasar
+
+```bash
+sudo apt update && sudo apt install -y curl git unzip xz-utils zip libglu1-mesa
+```
+
+### 1.6.2. Install Flutter SDK
+
+```bash
+cd ~ && git clone https://github.com/flutter/flutter.git -b stable
+```
+
+Cek:
+
+```bash
+flutter --version
+```
+
+### 1.6.3. Download android studio
+
+- Download android studio [Link download](https://developer.android.com/studio?hl=id)
+- Extract
+  ```bash
+  cd ~/Downloads && tar -xvf android-studio-*.tar.gz
+  ```
+- Pindahkan ke `/opt`
+  ```bash
+  sudo mv android-studio /opt/
+  ```
+- Jalankan
+  ```bash
+  /opt/android-studio/bin/studio.sh
+  ```
+- Install Android SDK
+  - Android SDK Build-Tools
+  - Android SDK Command-line Tools
+  - Android Emulator
+  - Android SDK Platform-Tools
+
+- Hubungkan Flutter dengan Android
+
+  ```bash
+  flutter doctor --android-licenses
+  ```
+
+  Tekan:
+
+  ```
+  y (accept semua)
+  ```
+
+### 1.6.4. Periksa instalasi
+
+```bash
+flutter doctor
+```
+
+### 1.6.5. Install ADB
+
+```bash
+sudo apt install adb
+```
+
+### 1.6.6. Buat Proyek Baru
+
+```bash
+flutter create my_app && cd my_app
+```
+
+Jalankan aplikasi:
+
+```bash
+flutter run
+```
