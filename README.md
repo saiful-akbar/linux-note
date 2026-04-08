@@ -98,7 +98,7 @@ Extension yang umum digunakan
 sudo apt install php-fpm php-gd php-cli php-mbstring php-xml php-curl php-mysql php-zip unzip -y
 ```
 
-### 1.3.3. Cek versi
+### 1.3.3. Cek versi php
 
 ```bash
 php -v
@@ -106,15 +106,47 @@ php -v
 
 ### 1.3.4. Install composer
 
-```bash
-sudo apt install composer -y
-```
+- Install paket
+  ```bash
+  sudo apt install composer -y
+  ```
+  
+- Cek versi composer
+  ```bash
+  composer -V
+  ```
 
-### 1.3.4. Cek versi composer
+### 1.3.5. Install Laravel Installer
 
-```bash
-composer -V
-```
+- Install Laravel Installer (Global)
+  ```bash
+  composer global require laravel/installer
+  ```
+
+  Secara default akan terinstall di:
+  ```bash
+  Secara default akan terinstall di:
+  ``` 
+
+- Tambahkan ke PATH
+  ```bash
+  nano ~/.bashrc
+  ```
+
+  Tambahkan kode ini dan simpan:
+  ```bash
+  export PATH="$HOME/.config/composer/vendor/bin:$PATH"
+  ```
+
+- Apply PATH
+  ```bash
+  source ~/.bashrc
+  ```
+
+- Verifikasi
+  ```bash
+  laravel --version
+  ```
 
 ## 1.4. Install NGINX
 
