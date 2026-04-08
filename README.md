@@ -448,7 +448,7 @@ sudo ln -s /opt/postman/Postman /usr/bin/postman
 postman
 ```
 
-### 1.7.6. Tambahkan ke Menu Linux Mint (GUI Launcher)
+### 1.7.6. Tambahkan ke Menu (Linux Mint)
 
 - Buat file desktop:
 
