@@ -286,27 +286,51 @@ sudo apt update && sudo apt install -y curl git unzip xz-utils zip libglu1-mesa
 cd ~ && git clone https://github.com/flutter/flutter.git -b stable
 ```
 
-Cek:
+### 1.6.3. Set PATH Flutter
 
+- Tambahkan ke PATH:
+  ```bash
+  nano ~/.bashrc
+  ```
+
+- Tambahkan dibagian bawah:
+  ```bash
+  export PATH="$PATH:$HOME/flutter/bin"
+  ```
+
+- Simpan, lalu reload:
+  ```bash
+  source ~/.bashrc
+  ```
+
+### 1.6.4. Verifikasi instalasi Flutter
+
+```bash
+flutter doctor
+```
+
+Cek versi:
 ```bash
 flutter --version
 ```
 
-### 1.6.3. Download android studio
+### 1.6.5. Download android studio
 
-- Download android studio [Link download](https://developer.android.com/studio?hl=id)
-- Extract
+- Download android studio [Link download](https://developer.android.com/studio?hl=id), lalu extract
   ```bash
   cd ~/Downloads && tar -xvf android-studio-*.tar.gz
   ```
+  
 - Pindahkan ke `/opt`
   ```bash
   sudo mv android-studio /opt/
   ```
+  
 - Jalankan
   ```bash
   /opt/android-studio/bin/studio.sh
   ```
+  
 - Install Android SDK
   - Android SDK Build-Tools
   - Android SDK Command-line Tools
@@ -314,37 +338,32 @@ flutter --version
   - Android SDK Platform-Tools
 
 - Hubungkan Flutter dengan Android
-
   ```bash
   flutter doctor --android-licenses
   ```
 
   Tekan:
-
   ```
   y (accept semua)
   ```
 
-### 1.6.4. Periksa instalasi
+### 1.6.6. Periksa instalasi
 
 ```bash
 flutter doctor
 ```
 
-### 1.6.5. Install ADB
-
+### 1.6.7. Install ADB
 ```bash
 sudo apt install adb
 ```
 
-### 1.6.6. Buat Proyek Baru
-
+### 1.6.8. Buat Proyek Baru
 ```bash
 flutter create my_app && cd my_app
 ```
 
 Jalankan aplikasi:
-
 ```bash
 flutter run
 ```
