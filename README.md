@@ -12,14 +12,16 @@ sudo mkdir /mnt/it
 ### 1.1.2. Buat file credentials
 
 - Buat file:
+
   ```bash
   sudo nano ~/.smbcredentials
   ```
 
 - Isikan username dan password:
+
   ```txt
   username=
-  password= 
+  password=
   ```
 
 - Lalu amankan:
@@ -110,7 +112,6 @@ php -v
   ```bash
   sudo apt install composer -y
   ```
-  
 - Cek versi composer
   ```bash
   composer -V
@@ -119,26 +120,31 @@ php -v
 ### 1.3.5. Install Laravel Installer
 
 - Install Laravel Installer (Global)
+
   ```bash
   composer global require laravel/installer
   ```
 
   Secara default akan terinstall di:
+
   ```bash
   Secara default akan terinstall di:
-  ``` 
+  ```
 
 - Tambahkan ke PATH
+
   ```bash
   nano ~/.bashrc
   ```
 
   Tambahkan kode ini dan simpan:
+
   ```bash
   export PATH="$HOME/.config/composer/vendor/bin:$PATH"
   ```
 
 - Apply PATH
+
   ```bash
   source ~/.bashrc
   ```
@@ -289,11 +295,13 @@ cd ~ && git clone https://github.com/flutter/flutter.git -b stable
 ### 1.6.3. Set PATH Flutter
 
 - Tambahkan ke PATH:
+
   ```bash
   nano ~/.bashrc
   ```
 
 - Tambahkan dibagian bawah:
+
   ```bash
   export PATH="$PATH:$HOME/flutter/bin"
   ```
@@ -310,6 +318,7 @@ flutter doctor
 ```
 
 Cek versi:
+
 ```bash
 flutter --version
 ```
@@ -320,17 +329,14 @@ flutter --version
   ```bash
   cd ~/Downloads && tar -xvf android-studio-*.tar.gz
   ```
-  
 - Pindahkan ke `/opt`
   ```bash
   sudo mv android-studio /opt/
   ```
-  
 - Jalankan
   ```bash
   /opt/android-studio/bin/studio.sh
   ```
-  
 - Install Android SDK
   - Android SDK Build-Tools
   - Android SDK Command-line Tools
@@ -338,11 +344,13 @@ flutter --version
   - Android SDK Platform-Tools
 
 - Hubungkan Flutter dengan Android
+
   ```bash
   flutter doctor --android-licenses
   ```
 
   Tekan:
+
   ```
   y (accept semua)
   ```
@@ -389,16 +397,78 @@ flutter doctor
 ```
 
 ### 1.6.7. Install ADB
+
 ```bash
 sudo apt install adb
 ```
 
 ### 1.6.8. Buat Proyek Baru
+
 ```bash
 flutter create my_app && cd my_app
 ```
 
 Jalankan aplikasi:
+
 ```bash
 flutter run
 ```
+
+## 1.7. Install Postman
+
+### 1.7.1. Download file .tar.gz [disini](https://www.postman.com/downloads/), lalu extract
+
+atau bisa langsung:
+
+```bash
+wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz
+```
+
+### 1.7.2. Extract
+
+```bash
+tar -xvzf postman.tar.gz
+```
+
+### 1.7.3. Pindahkan ke /opt
+
+```bash
+sudo mv Postman /opt/postman
+```
+
+### 1.7.4. Buat symlink
+
+```bash
+sudo ln -s /opt/postman/Postman /usr/bin/postman
+```
+
+### 1.7.5. Jalankan
+
+```bash
+postman
+```
+
+### 1.7.6. Tambahkan ke Menu Linux Mint (GUI Launcher)
+
+- Buat file desktop:
+
+  ```bash
+  nano ~/.local/share/applications/postman.desktop
+  ```
+
+- Isikan dengan kode berikut:
+
+  ```INI
+  [Desktop Entry]
+  Name=Postman
+  Exec=/opt/postman/Postman
+  Icon=/opt/postman/app/resources/app/assets/icon.png
+  Type=Application
+  Categories=Development;
+  ```
+
+- Simpan, lalu
+
+  ```bash
+  chmod +x ~/.local/share/applications/postman.desktop
+  ```
