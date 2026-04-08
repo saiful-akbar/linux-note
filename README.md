@@ -11,16 +11,21 @@ sudo mkdir /mnt/it
 
 ### 1.1.2. Buat file credentials
 
-```bash
-sudo mkdir -p ~/.smbcredentials
-```
+- Buat file:
+  ```bash
+  sudo nano ~/.smbcredentials
+  ```
 
-Lalu isikan seperti ini:
+- Isikan username dan password:
+  ```txt
+  username=
+  password= 
+  ```
 
-```txt
-username=
-password= 
-```
+- Lalu amankan:
+  ```bash
+  sudo chmod 600 ~/.smbcredentials
+  ```
 
 ### 1.1.3. Edit file `/etc/fstab`
 
