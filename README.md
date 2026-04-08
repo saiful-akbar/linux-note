@@ -1,6 +1,6 @@
 # 1. Debian (Ubuntu & Linuxmint)
 
-## 1.1. Cara mengkoneksikan file sharing samba (Client)
+## 1.1. Mengkoneksikan file sharing samba (Client)
 
 ### 1.1.1. Buat folder pada `/mnt`
 
