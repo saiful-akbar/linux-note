@@ -416,9 +416,9 @@ flutter run
 
 ## 1.7. Install Postman
 
-### 1.7.1. Download file .tar.gz [disini](https://www.postman.com/downloads/), lalu extract
+### 1.7.1. Download file
 
-atau bisa langsung:
+[Link download](https://www.postman.com/downloads/), atau bisa langsung:
 
 ```bash
 wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz
