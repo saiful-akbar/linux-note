@@ -231,7 +231,7 @@ sudo mysql
 - Lihat daftar user:
 
 ```sql
-SELECT user, host, plugin FROM mysql.user WHERE user = 'root'
+SELECT user, host, plugin FROM mysql.user WHERE user = 'root';
 ```
 
 - Kalau hasilnya:
