@@ -15,6 +15,13 @@ sudo mkdir /mnt/it
 sudo mkdir -p ~/.smbcredentials
 ```
 
+Lalu isikan seperti ini:
+
+```txt
+username=
+password= 
+```
+
 ### 1.1.3. Edit file `/etc/fstab`
 
 - Buka dieditor
