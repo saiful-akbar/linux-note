@@ -314,7 +314,7 @@ Cek versi:
 flutter --version
 ```
 
-### 1.6.5. Download android studio
+### 1.6.5. Install android studio
 
 - Download android studio [Link download](https://developer.android.com/studio?hl=id), lalu extract
   ```bash
@@ -346,6 +346,41 @@ flutter --version
   ```
   y (accept semua)
   ```
+
+- Menambahkan android studio ke menu (Linuxmint)
+  - Cek path:
+    ```bash
+    ls /opt/android-studio/bin/studio.sh
+    ```
+  - Buat file launcher
+    ```bash
+    nano ~/.local/share/applications/android-studio.desktop
+    ```
+    Isikan:
+    ```bash
+    [Desktop Entry]
+    Version=1.0
+    Type=Application
+    Name=Android Studio
+    Icon=/opt/android-studio/bin/studio.png
+    Exec=/opt/android-studio/bin/studio.sh
+    Comment=Android IDE
+    Categories=Development;IDE;
+    Terminal=false
+    StartupNotify=true
+    ```
+  - Aktifkan file:
+    ```bash
+    chmod +x ~/.local/share/applications/android-studio.desktop
+    ```
+  - Trust file:
+    ```bash
+    gio set ~/.local/share/applications/android-studio.desktop metadata::trusted true
+    ```
+  - Refresh menu:
+    ```bash
+    update-desktop-database ~/.local/share/applications
+    ```
 
 ### 1.6.6. Periksa instalasi
 
