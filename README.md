@@ -186,6 +186,63 @@ sudo apt autoremove
 sudo apt autoclean
 ```
 
+### 1.4.3. Membuat site available baru
+
+- Buat file konfigurasi
+
+  ```bash
+  sudo nano /etc/nginx/sites-available/{NAMA_APLIKASI}
+  ```
+
+  Isikan dengan kode berikut:
+
+  ```nginx
+  server {
+    listen 8000;
+    server_name 127.0.0.1;
+
+    root /path/ke/project/public;
+    index index.php index.html;
+
+    location / {
+      try_files $uri $uri/ /index.php?$query_string;
+    }
+
+    location ~ \.php$ {
+      include snippets/fastcgi-php.conf;
+      fastcgi_pass unix:/var/run/php/php8.3-fpm.sock; # sesuaikan versi PHP
+    }
+
+    location ~ /\.ht {
+      deny all;
+    }
+  }
+  ```
+
+- Aktifkan konfigurasi
+
+  ```bash
+  sudo ln -s /etc/nginx/sites-available/{NAMA_APLIKASI} /etc/nginx/sites-enabled/
+  ```
+
+- Tes konfigurasi
+
+  ```bash
+  sudo nginx -t
+  ```
+
+- Restart nginx
+
+  ```bash
+  sudo systemctl restart nginx
+  ```
+
+- Memastikan PHP-FPM aktif
+
+  ```bash
+  sudo systemctl status php8.3-fpm # sesuaikan versi PHP
+  ```
+
 ## 1.5. Install Database MySQL
 
 ### 1.5.1 Install paket
@@ -418,7 +475,7 @@ flutter run
 
 ### 1.7.1. Download file
 
-[Link download](https://www.postman.com/downloads/), atau bisa langsung:
+[Link download], atau bisa langsung:
 
 ```bash
 wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz
