@@ -38,8 +38,8 @@ sudo nano /etc/fstab
 - Lalu tambahkan kode berikut
 
 ```bash
-//10.10.2.77/general /mnt/general cifs credentials=/home/{USERNAME}/.smbcredentials,iocharset=utf8,uid=1000,gid=1000,nofail,_x-systemd.automount 0 0
-//10.10.2.77/it /mnt/it cifs credentials=/home/{USERNAME}/.smbcredentials,iocharset=utf8,uid=1000,gid=1000,nofail,_x-systemd.automount 0 0
+//10.10.2.77/general /mnt/general cifs credentials=/home/{USERNAME}/.smbcredentials,vers=3.0,_netdev,x-systemd.automount,nofail 0 0
+//10.10.2.77/it /mnt/it cifs credentials=/home/{USERNAME}/.smbcredentials,vers=3.0,_netdev,x-systemd.automount,nofail 0 0
 ```
 
 ### 1.1.3. Jalankan mount berikut
