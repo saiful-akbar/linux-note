@@ -37,7 +37,7 @@ sudo mkdir /mnt/it
 sudo nano /etc/fstab
 ```
 
-- Lalu tambahkan kode berikut
+- Lalu tambahkan kode berikut. Pastikan ubah `{USERNAME}` dengan username pc anda.
 
 ```bash
 //10.10.2.77/general /mnt/general cifs credentials=/home/{USERNAME}/.smbcredentials,iocharset=utf8,vers=3.0,_netdev,nofail,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0
