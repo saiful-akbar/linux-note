@@ -547,3 +547,32 @@ sudo systemctl restart NetworkManager
 - Klik tombol +
 - Pilih:
   - Layer 2 Tunneling Protocol (L2TP)
+ 
+## 1.9. Remote SFTP Tanpa Password
+Membuat koneksi SFTP ke linux server tanpa harus selalu memasukan password (Untuk backup Feelbuy Shop)
+
+### 1.9.1. Generate SSH Key
+
+```bash
+ssh-keygen -t ed25519 -C "linuxmint"
+```
+
+Tekan Enter terus untuk lokasi default:
+
+```bash
+~/.ssh/id_ed25519
+```
+
+### 1.9.2. Copy Public Key ke Ubuntu Server
+
+Ubah username dan ip-server
+
+```bash
+ssh-copy-id username@ip-server
+```
+
+### 1.9.3. Test Login
+
+```bash
+ssh username@ip-server
+```
