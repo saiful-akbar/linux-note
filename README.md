@@ -125,12 +125,6 @@ php -v
   composer global require laravel/installer
   ```
 
-  Secara default akan terinstall di:
-
-  ```bash
-  Secara default akan terinstall di:
-  ```
-
 - Tambahkan ke PATH
 
   ```bash
@@ -475,7 +469,7 @@ flutter run
 
 ### 1.7.1. Download file
 
-[Link download], atau bisa langsung:
+[Link download](https://www.postman.com/downloads/), atau bisa langsung:
 
 ```bash
 wget https://dl.pstmn.io/download/latest/linux64 -O postman.tar.gz
