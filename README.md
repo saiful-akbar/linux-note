@@ -523,3 +523,27 @@ postman
   ```bash
   chmod +x ~/.local/share/applications/postman.desktop
   ```
+
+## 1.8. Install VPN L2TP
+
+### 1.8.1. Install paket yang dibutuhkan
+
+```bash
+sudo apt update
+sudo apt install network-manager-l2tp network-manager-l2tp-gnome -y
+sudo apt install strongswan -y
+```
+
+### 1.8.2. Restart Network Manager
+
+```bash
+sudo systemctl restart NetworkManager
+```
+
+### 1.8.3. Tambahkan koneksi VPV
+
+- Buka Menu → Settings → Network
+- Pilih VPN
+- Klik tombol +
+- Pilih:
+  - Layer 2 Tunneling Protocol (L2TP)
