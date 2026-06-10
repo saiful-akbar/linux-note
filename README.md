@@ -547,8 +547,9 @@ sudo systemctl restart NetworkManager
 - Klik tombol +
 - Pilih:
   - Layer 2 Tunneling Protocol (L2TP)
- 
+
 ## 1.9. Remote SFTP Tanpa Password
+
 Membuat koneksi SFTP ke linux server tanpa harus selalu memasukan password (Untuk backup Feelbuy Shop)
 
 ### 1.9.1. Generate SSH Key
@@ -576,3 +577,233 @@ ssh-copy-id username@ip-server
 ```bash
 ssh username@ip-server
 ```
+
+## 1.10. Menambah Swap RAM dan ZRAM
+
+### 1.10.1. Menambahkan swap ram
+
+- Periksa kondisi saat ini:
+
+  ```bash
+  free -h
+  swapon --show
+  ```
+
+- Jika swap sudah ada. nonaktifkan terlebih dahulu.
+
+  ```bash
+  sudo swapoff /swapfile
+  ```
+
+  Verifikasi:
+
+  ```
+  swapon --show
+  ```
+
+  Seharusnya tidak ada output untuk /swapfile.
+
+- Hapus swap lama
+
+  ```bash
+  sudo rm /swapfile
+  ```
+
+- Buat Swap File Baru 8 GB
+
+  ```bash
+  sudo fallocate -l 8G /swapfile
+  ```
+
+  Jika fallocate gagal:
+
+  ```bash
+  sudo dd if=/dev/zero of=/swapfile bs=1M count=8192 status=progress
+  ```
+
+- Atur Permission
+
+  ```bash
+  sudo chmod 600 /swapfile
+  ```
+
+  Periksa:
+
+  ```bash
+  ls -lh /swapfile
+  ```
+
+- Format Sebagai Swap
+
+  ```bash
+  sudo mkswap /swapfile
+  ```
+
+- Aktifkan Swap
+
+  ```bash
+  sudo swapon /swapfile
+  ```
+
+  Verifikasi:
+
+  ```bash
+  swapon --show
+  free -h
+  ```
+
+  Contoh output:
+
+  ```bash
+  NAME      TYPE SIZE USED PRIO
+  /swapfile file   8G   0B   -2
+  ```
+
+- Pastikan Aktif Saat Boot
+
+  Cek isi /etc/fstab:
+
+  ```bash
+  cat /etc/fstab
+  ```
+
+  Pastikan terdapat baris:
+
+  ```bash
+  /swapfile none swap sw 0 0
+  ```
+
+  Jika belum ada:
+
+  ```bash
+  echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab
+  ```
+
+- Verifikasi Setelah Reboot
+
+  ```bash
+  sudo reboot
+  ```
+
+  Setelah masuk kembali:
+
+  ```bash
+  swapon --show
+  ```
+
+### 1.10.2. Install ZRAM
+
+Dengan RAM 8 GB, konfigurasi yang umum dan cukup efektif adalah:
+
+- ZRAM: 4 GB (50% RAM)
+- Swapfile: 8 GB (yang baru saja Anda buat)
+
+Prioritasnya dibuat sehingga Linux akan menggunakan ZRAM terlebih dahulu karena jauh lebih cepat dibanding swapfile di SSD/HDD.
+
+- Cek Apakah ZRAM Sudah Aktif
+
+  ```bash
+  swapon --show
+  ```
+
+  Jika hanya muncul /swapfile, berarti ZRAM belum aktif.
+
+- Install ZRAM
+
+  ```bash
+  sudo apt update && sudo apt install systemd-zram-generator
+  ```
+
+- Buat Konfigurasi
+
+  Buat file konfigurasi:
+
+  ```bash
+  sudo nano /etc/systemd/zram-generator.conf
+  ```
+
+  Isi dengan:
+
+  ``ini
+  [zram0]
+  zram-size = ram / 2
+  compression-algorithm = zstd
+  swap-priority = 100
+
+  ```
+
+  Keterangan:
+
+  - ram / 2 → 4 GB ZRAM untuk RAM 8 GB.
+  - zstd → algoritma kompresi yang cepat dan efisien.
+  - swap-priority = 100 → ZRAM digunakan sebelum swapfile.
+
+  Simpan lalu keluar (Ctrl+O, Enter, Ctrl+X).
+  ```
+
+- Aktifkan ZRAM
+
+  Reload konfigurasi:
+
+  ```bash
+  sudo systemctl daemon-reload && sudo systemctl start systemd-zram-setup@zram0
+  ```
+
+  Jika muncul error, reboot:
+
+  ```bash
+  sudo reboot
+  ```
+
+- Verifikasi
+
+  Setelah reboot:
+
+  ```bash
+  swapon --show
+  ```
+
+  Hasil yang diharapkan:
+
+  ```
+  NAME        TYPE      SIZE USED PRIO
+  /dev/zram0  partition 4G   0B   100
+  /swapfile   file      8G   0B   -2
+  ```
+
+  Atau:
+
+  ```bash
+  zramctl
+  ```
+
+  Contoh output:
+
+  ```bash
+  NAME       ALGORITHM DISKSIZE DATA COMPR TOTAL STREAMS
+  /dev/zram0 zstd          4G
+  ```
+
+- Optimasi Swappiness
+
+  Agar Linux tidak terlalu agresif menggunakan swapfile:
+
+  ```bash
+  echo 'vm.swappiness=10' | sudo tee /etc/sysctl.d/99-swappiness.conf
+  ```
+
+  ```bash
+  sudo sysctl --system
+  ```
+
+  Verifikasi:
+
+  ```bash
+  cat /proc/sys/vm/swappiness
+  ```
+
+  Hasil:
+
+  ```
+  10
+  ```
