@@ -7,6 +7,8 @@
 ```bash
 sudo mkdir /mnt/general
 sudo mkdir /mnt/it
+sudo mkdir /mnt/kam
+sudo mkdir /mnt/warehouse
 ```
 
 ### 1.1.2. Buat file credentials
@@ -42,6 +44,8 @@ sudo nano /etc/fstab
 ```bash
 //10.10.2.77/general /mnt/general cifs credentials=/home/{USERNAME}/.smbcredentials,iocharset=utf8,vers=3.0,_netdev,nofail,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0
 //10.10.2.77/it /mnt/it cifs credentials=/home/{USERNAME}/.smbcredentials,iocharset=utf8,vers=3.0,_netdev,nofail,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0
+//10.10.2.77/kam /mnt/kam cifs credentials=/home/{USERNAME}/.smbcredentials,iocharset=utf8,vers=3.0,_netdev,nofail,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0
+//10.10.2.77/warehouse /mnt/warehouse cifs credentials=/home/{USERNAME}/.smbcredentials,iocharset=utf8,vers=3.0,_netdev,nofail,uid=1000,gid=1000,file_mode=0777,dir_mode=0777 0 0
 ```
 
 ### 1.1.3. Jalankan mount berikut
