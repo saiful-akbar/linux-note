@@ -728,7 +728,7 @@ Prioritasnya dibuat sehingga Linux akan menggunakan ZRAM terlebih dahulu karena 
 
   Isi dengan:
 
-  ``ini
+  ```ini
   [zram0]
   zram-size = ram / 2
   compression-algorithm = zstd
@@ -743,7 +743,6 @@ Prioritasnya dibuat sehingga Linux akan menggunakan ZRAM terlebih dahulu karena 
   - swap-priority = 100 → ZRAM digunakan sebelum swapfile.
 
   Simpan lalu keluar (Ctrl+O, Enter, Ctrl+X).
-  ```
 
 - Aktifkan ZRAM
 
