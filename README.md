@@ -241,6 +241,157 @@ sudo apt autoclean
   sudo systemctl status php8.3-fpm # sesuaikan versi PHP
   ```
 
+### 1.4.4. Install phpMyAdmin
+
+- Update repository
+
+  ```bash
+  sudo apt update
+  sudo apt upgrade -y
+  ```
+
+- Install phpMyAdmin
+
+  ```bash
+  sudo apt install phpmyadmin -y
+  ```
+
+  Saat proses instalasi:
+  - Jika muncul pilihan web server (apache2 atau lighttpd), tekan TAB lalu pilih OK tanpa mencentang apa pun (karena menggunakan Nginx).
+  - Pilih Yes untuk konfigurasi database dengan dbconfig-common jika diinginkan.
+  - Masukkan password MySQL saat diminta.
+
+- Pastikan PHP-FPM 8.3 Terinstall
+  - Cek:
+
+    ```bash
+    php -v
+    ```
+
+  - Pastikan ada service PHP-FPM:
+
+    ```bash
+    systemctl status php8.3-fpm
+    ```
+
+  - Install jika belu ada:
+
+    ```bash
+    sudo apt install php8.3-fpm php8.3-mysql php8.3-mbstring php8.3-zip php8.3-gd php8.3-curl php8.3-xml -y
+    ```
+
+    Aktifkan:
+
+    ```bash
+    sudo systemctl enable php8.3-fpm
+    sudo systemctl start php8.3-fpm
+    ```
+
+- Buat Symlink phpMyAdmin
+  - Biasanya phpMyAdmin berada di: `/usr/share/phpmyadmin`.
+  - Buat link ke web root:
+
+    ```bash
+    sudo ln -s /usr/share/phpmyadmin /var/www/html/phpmyadmin
+    ```
+
+    Periksa:
+
+    ```bash
+    ls -lah /var/www/html/
+    ```
+
+- Konfigurasi Nginx
+  - Edit file virtual host Anda:
+
+    ```bash
+    sudo nano /etc/nginx/sites-available/default
+    ```
+
+  - Tambahkan pada blok server {}:
+
+    ```nginx
+    location /phpmyadmin {
+      root /var/www/html;
+      index index.php;
+    }
+
+    location ~ ^/phpmyadmin/(.+\.php)$ {
+      root /var/www/html;
+
+      fastcgi_pass unix:/run/php/php8.3-fpm.sock;
+      fastcgi_index index.php;
+
+      include fastcgi_params;
+      fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
+    }
+    ```
+
+    Contoh sederhana:
+
+    ```nginx
+    server {
+      listen 80;
+      server_name localhost;
+
+      root /var/www/html;
+      index index.php index.html;
+
+      location / {
+        try_files $uri $uri/ =404;
+      }
+
+      location /phpmyadmin {
+        index index.php;
+      }
+
+      location ~ \.php$ {
+        include snippets/fastcgi-php.conf;
+        fastcgi_pass unix:/run/php/php8.3-fpm.sock;
+      }
+    }
+    ```
+
+- Test Konfigurasi Nginx
+
+  ```bash
+  sudo nginx -t
+  ```
+
+  Jika hasilnya:
+
+  ```bash
+  syntax is ok
+  test is successful
+  ```
+
+  Restart Nginx:
+
+  ```bash
+  sudo systemctl restart nginx
+  ```
+
+- Akses phpMyAdmin
+
+  Buka browser:
+
+  ```
+  http://localhost/phpmyadmin
+  ```
+
+  atau
+
+  ```
+  http://IP_SERVER/phpmyadmin
+  ```
+
+  Login menggunakan akun MySQL, misalnya:
+
+  ```
+  Username: root
+  Password: password_mysql
+  ```
+
 ## 1.5. Install Database MySQL
 
 ### 1.5.1 Install paket
@@ -737,7 +888,6 @@ Prioritasnya dibuat sehingga Linux akan menggunakan ZRAM terlebih dahulu karena 
   ```
 
   Keterangan:
-
   - ram / 2 → 4 GB ZRAM untuk RAM 8 GB.
   - zstd → algoritma kompresi yang cepat dan efisien.
   - swap-priority = 100 → ZRAM digunakan sebelum swapfile.
