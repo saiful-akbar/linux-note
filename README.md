@@ -529,7 +529,23 @@ Cek versi:
 flutter --version
 ```
 
-### 1.6.5. Install android studio
+### 1.6.5. Intall Flutter Version Management (FVM)
+
+- Jalankan perintah berikut:
+  ```bash
+  dart pub global activate fvm
+  ```
+- Tambahkan lokasi executable Dart ke PATH jika belum:
+  ```bash
+  echo 'export PATH="$PATH":"$HOME/.pub-cache/bin"' >> ~/.bashrc
+  source ~/.bashrc
+  ```
+- Pastikan instalasi berhasil:
+  ```bash
+  fvm --version
+  ```
+
+### 1.6.6. Install android studio
 
 - Download android studio [Link download](https://developer.android.com/studio?hl=id), lalu extract
   ```bash
@@ -596,19 +612,19 @@ flutter --version
     update-desktop-database ~/.local/share/applications
     ```
 
-### 1.6.6. Periksa instalasi
+### 1.6.7. Periksa instalasi
 
 ```bash
 flutter doctor
 ```
 
-### 1.6.7. Install ADB
+### 1.6.8. Install ADB
 
 ```bash
 sudo apt install adb
 ```
 
-### 1.6.8. Buat Proyek Baru
+### 1.6.9. Buat Proyek Baru
 
 ```bash
 flutter create my_app && cd my_app
