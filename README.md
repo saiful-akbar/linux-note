@@ -529,7 +529,7 @@ Cek versi:
 flutter --version
 ```
 
-### 1.6.5. Intall Flutter Version Management (FVM)
+### 1.6.5. Install Flutter Version Management (FVM)
 
 - Jalankan perintah berikut:
   ```bash
