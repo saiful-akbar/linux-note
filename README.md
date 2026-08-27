@@ -976,3 +976,52 @@ Prioritasnya dibuat sehingga Linux akan menggunakan ZRAM terlebih dahulu karena 
   ```
   10
   ```
+
+## 1.11. Sinkronisasi Waktu
+
+### 1.11.1. Cek kondisi waktu
+
+```bash
+sudo datetimectl status
+```
+
+Perhatikan bagian:
+
+```bash
+System clock synchronized: yes
+NTP service: active
+```
+
+### 1.11.2. Aktifkan sinkronisasi waktu
+
+Pada Ubuntu yang menggunakan systemd-timesyncd:
+
+```bash
+sudo timedatectl set-ntp true
+```
+
+Kemudian cek:
+
+```bash
+timedatectl status
+```
+
+### 1.11.3. Pastikan timezone Indonesia
+
+Jika server Anda berada di WIB:
+
+```bash
+sudo timedatectl set-timezone Asia/Jakarta
+```
+
+Lalu:
+
+```bash
+timedatectl
+```
+
+Seharusnya:
+
+```bash
+Time zone: Asia/Jakarta (WIB, +0700)
+```
