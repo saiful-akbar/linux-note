@@ -484,9 +484,9 @@ Ikuti langkah-langkah:
 - Remove test database → YES
 - Reload privilege → YES
 
-### 1.5.5. Mengatur agar dapat menerima koneksi remote (Optional Ubuntu)
+### 1.5.5. Buka koneksi remote (Optional)
 
-#### 1.5.5.1. Periksa IP yang digunakan untuk menerima koneksi
+#### 1.5.5.1. Periksa IP
 
 ```sql
 SHOW VARIABLES LIKE 'bind_address';
@@ -494,7 +494,7 @@ SHOW VARIABLES LIKE 'bind_address';
 
 Jika hasilnya 127.0.0.1, MySQL hanya menerima koneksi dari komputer server itu sendiri.
 
-#### 1.5.5.2. Ubah konfigurasi agar menerika koneksi remote
+#### 1.5.5.2. Ubah konfigurasi koneksi remote
 
 - Buka file konfigurasi MySQL:
 
