@@ -520,7 +520,7 @@ Jika hasilnya 127.0.0.1, MySQL hanya menerima koneksi dari komputer server itu s
   sudo systemctl restart mysql
   ```
 
-#### 1.5.5.2. Pastikan user dapat menerima koneksi remote
+#### 1.5.5.2. Pastikan user dapat menerima koneksi
 
 - Masuk MySQL
 
