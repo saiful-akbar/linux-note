@@ -484,6 +484,84 @@ Ikuti langkah-langkah:
 - Remove test database → YES
 - Reload privilege → YES
 
+### 1.5.5. Mengatur agar dapat menerima koneksi remote (Optional Ubuntu)
+
+#### 1.5.5.1. Periksa IP yang digunakan untuk menerima koneksi
+
+```sql
+SHOW VARIABLES LIKE 'bind_address';
+```
+
+Jika hasilnya 127.0.0.1, MySQL hanya menerima koneksi dari komputer server itu sendiri.
+
+#### 1.5.5.2. Ubah konfigurasi agar menerika koneksi remote
+
+- Buka file konfigurasi MySQL:
+
+  ```bash
+  sudo nano /etc/mysql/mysql.conf.d/mysqld.cnf
+  ```
+
+- Cari konfigurasi berikut:
+
+  ```bash
+  bind-address = 127.0.0.1
+  ```
+
+- Ubah menjadi:
+
+  ```bash
+  bind-address = 0.0.0.0
+  ```
+
+- Restart MySQL:
+
+  ```bash
+  sudo systemctl restart mysql
+  ```
+
+#### 1.5.5.2. Pastikan user dapat menerima koneksi remote
+
+- Masuk MySQL
+
+  ```bash
+  mysql -u root -p
+  ```
+
+- Periksa user
+
+  ```sql
+  SELECT user, host, plugin FROM mysql.user;
+  ```
+
+  ```bash
+  +------+-----------+-----------------------+
+  | user | host      | plugin                |
+  +------+-----------+-----------------------+
+  | root | localhost | auth_socket           |
+  +------+-----------+-----------------------+
+  ```
+
+- Buat user yang bisa diakses dari semua host (contoh: root)
+
+  ```sql
+  CREATE USER 'root'@'%' IDENTIFIED BY 'ISIKAN_PASSWORD_ROOT';
+  ```
+
+  ```sql
+  GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+  ```
+
+- Jika `'root'@'%'` sudah ada dan error: `ERROR 1396 (HY000)`
+
+  ```sql
+  ALTER USER 'root'@'%' IDENTIFIED BY 'ISIKAN_PASSWORD_ROOT';
+  ```
+
+  ```sql
+  GRANT ALL PRIVILEGES ON *.* TO 'root'@'%' WITH GRANT OPTION;
+  ```
+
 ## 1.6. Install Dart & Flutter
 
 ### 1.6.1. Install Dependency Dasar
