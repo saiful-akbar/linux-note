@@ -1103,3 +1103,138 @@ Seharusnya:
 ```bash
 Time zone: Asia/Jakarta (WIB, +0700)
 ```
+
+## 1.12. Buat SSH ID
+
+SSH ID berguna agar koneksi ssh ke server bisa dilakukan tanpa password.
+
+### 1.12.1. Membuat SSH Key di Linux Mint
+
+Buka Terminal Linux Mint, kemudian jalankan:
+
+```bash
+ssh-keygen -t ed25519 -C "linux-mint"
+```
+
+Keterangan:
+- -t ed25519: Menggunakan algoritma Ed25519 yang modern dan direkomendasikan.
+- -C: Memberikan komentar sebagai identitas SSH Key.
+
+Ketika muncul pertanyaan:
+
+```bash
+Enter file in which to save the key (/home/username/.ssh/id_ed25519):
+```
+
+Tekan Enter untuk menggunakan lokasi default.
+
+Selanjutnya:
+
+```bash
+Enter passphrase (empty for no passphrase):
+```
+
+Jika ingin benar-benar tidak memasukkan password atau passphrase ketika menggunakan SSH, tekan Enter tanpa mengisi passphrase.
+
+Konfirmasi kembali dengan menekan Enter.
+
+SSH Key akan dibuat di:
+
+```bash
+~/.ssh/id_ed25519
+~/.ssh/id_ed25519.pub
+```
+
+### 1.12.2. Mengirim Public Key ke Server
+
+Misalnya:
+- Username server: saiful
+- IP server: 192.168.1.100
+- Port SSH: 22
+
+Jalankan Perintah:
+
+```bash
+ssh-copy-id -i ~/.ssh/id_ed25519.pub saiful@192.168.1.100
+```
+
+Masukkan password server ketika diminta.
+
+Jika SSH server menggunakan port khusus, misalnya 2222:
+
+```bash
+ssh-copy-id -i ~/.ssh/id_ed25519.pub -p 2222 saiful@192.168.1.100
+```
+
+Perintah tersebut akan menambahkan public key ke:
+
+```text
+~/.ssh/authorized_keys
+```
+
+### 1.12.3. Mencoba Koneksi SSH
+
+Sekarang coba koneksi:
+
+```bash
+ssh saiful@192.168.1.100
+```
+
+Seharusnya kamu sudah bisa masuk ke server tanpa memasukkan password akun server.
+
+Jika menggunakan port khusus:
+
+```bash
+ssh -p 2222 saiful@192.168.1.100
+```
+
+### 1.12.4. (Opsional) Membuat SSH Config
+
+Supaya tidak perlu mengetik username, IP, dan port berulang kali, buat konfigurasi SSH.
+
+Buka file:
+
+```bash
+nano ~/.ssh/config
+```
+
+Tambahkan:
+
+```
+Host myserver
+    HostName 192.168.1.100
+    User saiful
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519
+    IdentitiesOnly yes
+```
+
+Simpan dengan CTRL + O, Enter, kemudian CTRL + X.
+
+Sekarang koneksi cukup menggunakan:
+
+```bash
+ssh myserver
+```
+
+Jika memiliki beberapa server, kamu bisa menambahkan beberapa konfigurasi:
+
+```bash
+Host server-production
+    HostName 103.xxx.xxx.xxx
+    User saiful
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519
+
+Host server-development
+    HostName 192.168.1.100
+    User saiful
+    Port 2222
+    IdentityFile ~/.ssh/id_ed25519
+
+Host server-database
+    HostName 192.168.1.101
+    User admin
+    Port 22
+    IdentityFile ~/.ssh/id_ed25519
+```
